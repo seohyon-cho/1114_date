@@ -24,13 +24,21 @@ class Student {
 	plusAge() {
 		this.age = this.age + 1;
 	}
+
+	changeSchool(el) {
+		this.school = el;
+	}
 }
 // 생성자를 통해서 2개의 인스턴스 객체 복사
 const s1 = new Student('David', 20);
 const s2 = new Student('Emily', 21);
 console.log(s1, s2);
 // 인스턴스가 생성된 이후, 프로토타입의 메서드를 호출해서 일괄적으로 인스턴스의 구조를 변경 가능.
-[s1, s2].forEach((el) => el.plusAge());
+[s1, s2].forEach((el) => {
+	el.changeSchool('경희대학교');
+	el.plusAge();
+});
+
 console.log(s1, s2);
 
 // 리터럴 식
