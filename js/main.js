@@ -4,7 +4,6 @@ setInterval(() => {
 	const hr = new Date().getHours();
 	const min = new Date().getMinutes();
 	const sec = new Date().getSeconds();
-	let num = 1;
 
 	// spanHr.innerText = hr;
 	if (hr > 12) {
