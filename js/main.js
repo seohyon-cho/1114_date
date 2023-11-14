@@ -1,43 +1,33 @@
-const now = new Date(); // 현재 시간 인스턴스객체 반환
-const year = now.getFullYear(); // 시간 인스턴스에서 메서드 활용해 년도 반환
-const month = now.getMonth(); // 월의 값이 아닌 순서
-const monthName = [
-	'Jan',
-	'Feb',
-	'Mar',
-	'Apr',
-	'May',
-	'Jun',
-	'Jul',
-	'Aug',
-	'Sep',
-	'Oct',
-	'Nov',
-	'Dec',
-];
-console.dir(now);
-console.log(year);
-console.log(month);
-console.log(monthName[month]);
+// 특정 시간 구간에 맞게 호출하는 메서드
+// setTimeout(실행할 함수, 지연시간) : 일정 시간 이후에 한 번만 호출
+// setInterval(실행할 함수, 반복되는 텀) : 일정 시간마다 계속해서 반복 호출
 
-const date = now.getDate(); // 일 반환
-const day = now.getDay(); // 순서가 반환되는데, 일요일부터 시작해서 0, 1, 2 로 순서 따짐.
-const hour = now.getHours(); // 시간 반환
-const min = now.getMinutes(); // 분 반환
-const sec = now.getSeconds(); // 초 반환
-const time = now.getTime(); // 표준시가 지정된 시점으로부터의 ms 값이 반환됨.
-console.log(time);
-console.log(sec);
-console.log(min);
-console.log(hour);
-console.log(date);
-console.log(day);
+/* setTimeout(() => {
+	console.log('5초 지난 뒤 실행');
+}, 5000);
 
-// 특정 국가의 표준 시 구하는 방법
-// 1. 우리나라 시간대를 밀리세컨드로 반환 후, 시차값을 밀리세컨드로 변환하여 빼준다.
-const timeGerman = time - 1000 * 60 * 60 * 8;
-// 2. 해당 밀리세컨드 값을 new Date()의 인수로 전달하면
-// 해당 밀리세컨드 시간 값에 맞게 시간 인스턴스 값이 수정되어 반환된다.
-const nowGerman = new Date(timeGerman);
-console.log('한국시간', now);
-console.log('독일시간', nowGerman);
+setInterval(() => {
+	console.log('1초마다 반복실행');
+}, 1000); */
+
+//비구조 할당 (button을 모두 가져온 뒤, 첫 번째 버튼은 btnStart로, 두 번째 버튼은 btnStop으로 짝 짓는 것.)
+const [btnStart, btnStop] = document.querySelectorAll('button');
+// 전역변수를 써야 하는 경우
+// 특정 변수값이 서로 다른 함수에서 공유 되어야 하는 경우
+// [전역변수 쓰는 방법]
+// : 코드블록 밖에서 변수 선언한 뒤, null이나 기본 자료값으로 초기화
+// : 함수 안쪽에서 새로 지역변수를 만드는 것이 아니라, 기존 전역변수를 그대로 가지고 와서 새로운 값만 재할당하는 것.
+let timer = null;
+
+timer = setInterval(() => {
+	console.log('1초마다 반복실행');
+}, 1000);
+
+btnStop.addEventListener('click', () => {
+	clearInterval(timer);
+});
+btnStart.addEventListener('click', () => {
+	timer = setInterval(() => {
+		console.log('1초마다 반복실행');
+	}, 1000);
+});
